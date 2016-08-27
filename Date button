@@ -1,0 +1,39 @@
+<!DOCTYPE html><html class=''>
+<head>
+
+    <meta charset='UTF-8'>
+
+
+
+</head><body>
+<button onclick="time();">Узнать время</button>
+<script>
+function time(){
+var h=(new Date()).getHours();
+if(h<12){
+alert("Доброе утро!")
+}
+if(h<18){
+alert("Добрый день!")
+}
+if(h<22){
+alert("Добрый вечер!")
+}
+if(h<0){
+alert("Доброй ночи!")
+}
+var d=new Date();
+var opt = {
+
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  weekday: 'long',
+  timezone: 'UTC',
+  hour: 'numeric',
+  minute: 'numeric',
+
+};
+
+alert( d.toLocaleString("ru", opt) )
+}
