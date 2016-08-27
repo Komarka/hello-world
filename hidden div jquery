@@ -1,0 +1,32 @@
+<!DOCTYPE html><html class=''>
+<head>
+
+    <meta charset='UTF-8'>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+</head><body>
+<ul>
+<li>
+    <ul>
+    <li><a href="#" id="m">ad</a>
+    <li><a href="#" id="m2">adad</a>
+    <li><a href="#" id="m3">adad</a>
+    <li><a href="#" id="m4">adad</a>
+    </li>
+</li>
+</ul>
+<script>
+$("#m2").hide();
+$("#m3").hide();
+$("#m4").hide();
+$("#m").on("click",function(){
+    $("#m2").slideToggle(500);
+     $("#m3").slideToggle(500);
+      $("#m4").toggle(500);
+
+});
+</script>
+
+</body>
+</html>
