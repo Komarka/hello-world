@@ -1,0 +1,21 @@
+function ask(question,answer,ok,fail){
+    var result=prompt(question,"");
+    if(result.toLowerCase()==answer.toUpperCase())ok();
+    else fail();
+}
+var user={
+    username:"Jack",
+    password:"12345",
+
+loginok:function(){
+    alert(this.username + " Enter the site");
+},
+loginfalse:function(){
+    alert(this.username + " has some error");
+},
+checkpassword : function(){
+ask("Yours password",this.password,this.loginok.bind(this),this.loginfalse.bind(this));
+}
+};
+user.checkpassword();
+</script>
