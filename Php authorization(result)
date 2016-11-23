@@ -1,0 +1,7 @@
+<?php
+session_start();
+echo  "<h1>Your authorization finished succesfully </h1>";
+	echo " Welcome mister  ".$_SESSION['name'];
+
+
+?>
