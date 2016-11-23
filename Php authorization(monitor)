@@ -1,0 +1,47 @@
+<?php
+session_start();
+if(isset($_POST['enter'])){
+	$name=htmlspecialchars(trim(stripslashes($_POST['name'])));
+	$password=htmlspecialchars(trim(stripslashes($_POST['password'])));
+	$email=htmlspecialchars(trim(stripslashes($_POST['email'])));
+
+$_SESSION['name']=$name;
+$_SESSION['password']=$password;
+$_SESSION['email']=$email;
+$error=false;
+
+if($name=="" && $password=="" && $email==""){
+	$error=true;
+	echo "<h1>Error!</h1>";
+	echo "<p> Fill all the fields in order to continue! </p>";
+	echo "<a href='index.php'>Get back to authorization</a>";
+}
+ if(!preg_match("/[1-9]+/", $password)){
+ 	$error=true;
+
+	echo  "<h1>Error!</h1>";
+	echo "<p> Password should contain at least one number! </p>";
+	echo "<a href='index.php'>Get back to authorization</a>";
+
+}
+ if (!preg_match("/[a-z]+/i", $password)){
+ 	$error=true;
+
+	echo  "<h1>Error!</h1>";
+	echo "<p> Password should contain at least one letter! </p>";
+	echo "<a href='index.php'>Get back to authorization</a>";
+
+}
+if(!preg_match("/[a-z]*[0-9]*@+com|net|ru$/i", $email)){
+$error=true;
+
+	echo  "<h1>Error!</h1>";
+	echo "<p> Invalid email form,please try again </p>";
+	echo "<a href='index.php'>Get back to authorization</a>";
+}
+if(!$error){
+	header("Location:main.php");
+}
+}
+
+?>
