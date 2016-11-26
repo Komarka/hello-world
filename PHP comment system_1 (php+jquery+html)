@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Comments adding</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+<div id="comment">
+<?php
+   
+ $mysqli = new mysqli("localhost", "root", "", "mydb");// Подключается к базе данных
+  $result_set = $mysqli->query("SELECT * FROM `commentaries`"); //Вытаскиваем все комментарии для 
+  while ($row = $result_set->fetch_assoc()) {
+    echo "<h1 >".$row['name']."</h1>";
+    echo "<p>".$row['text_area']."</p>";
+    echo "<hr>";
+    echo "</div>";
+    echo "<br />";
+  }
+  
+
+ 
+?>
+
+</div>
+<form id="form" hidden name="main" method="post" action="content.php">
+Name: <br />
+<input name="name"  id="name" type="text"  /> <br />
+Comment: <br />
+ <p><textarea rows="10" cols="45" name="text"></textarea></p>
+<input type="submit" name="enter" id="button" value="Add" />
+</form>
+<input type="button" value="Comment" id="show">
+
+<script>
+$("#show").click(function(){
+	$("#form").show();
+});
+
+
+
+</script>
+
+
+
+</body>
+</html>
