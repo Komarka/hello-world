@@ -1,0 +1,12 @@
+<?php
+if(isset($_POST['enter'])){
+$name=htmlspecialchars(trim(stripslashes($_POST['name'])));
+$text=htmlspecialchars(trim(stripslashes($_POST['text'])));
+$mysqli=mysqli_connect("localhost","root","","mydb") or die("Error ".mysqli_error($mysqli));
+$query="INSERT INTO `commentaries`(`id`,`name`,`text_area`)VALUES(NULL,'$name','$text')";
+$mysqli=mysqli_query($mysqli,$query);
+header("Location:index.php");
+}
+
+mysqli_close($mysqli);
+?>
