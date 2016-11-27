@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Search engine</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+<form action="index.php" method="post">
+<input type="text" name="search" id="searching_area" placeholder="Searching...">
+<input type="submit" name="enter" id="button" value="Search">
+</form>
+<div id="result">
+<?php
+$link=mysql_connect("localhost","root","");
+if (!$link) {
+    die('Ошибка соединения: ' . mysql_error());
+}
+mysql_select_db("mydb") or die("Не могу подключиться к базе.");
+$searching=$_POST['search'];
+if(isset($_POST['enter'])){
+if(!empty($searching)){
+$query=mysql_query("SELECT * FROM `searchingdb` WHERE `head` LIKE '%$searching%' OR `article` LIKE '%$searching%'") or die("could not find");
+$number=mysql_num_rows($query);
+if($number==0){
+  echo "There is no any result";
+}else{
+  while($row=mysql_fetch_assoc($query)){
+    echo "<p><a href=#>".$row['head']."</a></p>";
+    echo "<br />";
+  }
+}
+}
+}
+mysql_close($link);
+
+?>
+</div>
+<script>
+$("#searching_area").focus(function(){
+	$("#searching_area").css("background-color","yellow");
+})
+$("#searching_area").blur(function(){
+	$("#searching_area").css("background-color","");
+})
+
+
+</script>
+<style>
+#button{
+	cursor: pointer;
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Georgia;
+  letter-spacing: 1px;
+  color: #ffffff;
+  font-size: 10px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+#button:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #34d9bd);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #34d9bd);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #34d9bd);
+  background-image: -o-linear-gradient(top, #3cb0fd, #34d9bd);
+  background-image: linear-gradient(to bottom, #3cb0fd, #34d9bd);
+  text-decoration: none;
+}
+
+}
+</style>
+</body>
+</html>
