@@ -1,0 +1,51 @@
+<html>
+<head>
+<meta charset="utf-8">
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<title>MySite</title>
+</head>
+<body>
+
+Email:  <input type="text" id="email">
+
+<div id="feedback"></div>
+<script>
+function validate_email(email){
+	$.post("content.php",{email:email},function(data){
+$("#feedback").text(data);
+	});
+	
+}
+$("#email").focusin(function (){
+	if($("#email").val()===""){
+$("#feedback").text("Enter the correct email");
+}else{
+validate_email($("#email").val());
+
+}
+})
+$("#email").blur(function (){
+$("#feedback").text("");
+})
+$("#email").keyup(function (){
+validate_email($("#email").val());
+
+});
+</script>
+</body>
+</html>
+
+<?php
+
+	if(isset($_POST['email'])) {
+		$email=$_POST['email'];
+		if(!empty($email)) {
+			if(filter_var($email, FILTER_VALIDATE_EMAIL)===false){
+				echo " not the correct email";
+			}else{
+				echo "Valid email address";
+			}
+		}
+	}
+
+?>
