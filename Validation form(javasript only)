@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+<div id="wrapper">
+<form  method="POST" name="form" onsubmit="return validation()">
+<div>
+<input type="text" id="username" name="username" placeholder="username">
+<div id ="username_error" class="error"></div>
+</div>
+<div>
+<input type="email" id="email"  name="email" placeholder="email">
+<div id ="email_error" class="error"></div>
+</div>
+<div>
+<input type="password" id="password" name="password" placeholder="password">
+</div>
+<div>
+<input  id="password_confirmation" type="password" placeholder="password confirmation ">
+<div id ="password_error" class="error"></div>
+</div>
+<div>
+<input type="submit" value="Send">
+</div>
+</form>
+</div>
+<script>
+var form=document.forms[0];
+var username=form.elements.username;
+var email=form.elements.email;
+var password=form.elements.password;
+var password_confirmation=form.elements.password_confirmation;
+
+var username_error=document.getElementById("username_error");
+var email_error=document.getElementById("email_error");
+var password_error=document.getElementById("password_error");
+username.addEventListener("blur", nameVerify, true);
+email.addEventListener("blur", emailVerify, true);
+password.addEventListener("blur", passwordVerify, true);
+function validation(){
+  if(username.value==""){
+    username.style.border="2px solid red";
+    username_error.textContent="Username is required";
+    username.focus();
+    return false;
+  }
+   if(email.value==""){
+    email.style.border="2px solid red";
+    email_error.textContent="Email is required";
+    email.focus();
+    return false;
+  }
+   if(password.value==""){
+    password.style.border="2px solid red";
+    password_error.textContent="Password is required";
+    password.focus();
+    return false;
+  }
+if(password.value !=password_confirmation.value){
+  password_confirmation.style.border="2px solid red";
+  password.style.border="2px solid red";
+  password_error.textContent="The two passwords arent the same";
+  return false;
+}
+
+}
+function nameVerify(){
+  if(username.value !=""){
+    username.style.border="1px solid green";
+    username_error.innerHTML="";
+    return true;
+  }
+}
+function emailVerify(){
+  if(email.value !=""){
+    email.style.border="1px solid green";
+    email_error.innerHTML="";
+    return true;
+  }
+}
+function passwordVerify(){
+  if(password.value !=""){
+    pasword.style.border="1px solid green";
+    password_error.innerHTML="";
+    return true;
+  }
+}
+
+</script>
+<style>
+#wrapper{
+  margin-left:270px;
+  width: 200px;
+  height: 400px;
+  background:#dbdbdb;
+}
+.access{
+  border:2x solid blue;
+}
+.error{
+  color:red;
+}
+<style>
+</body>
+</html>
