@@ -1,0 +1,28 @@
+<body>
+ <li>Животные
+      <ul>
+        <li>Млекопитающие
+          <ul>
+            <li>Коровы</li>
+            <li>Ослы</li>
+            <li>Собаки</li>
+            <li>Тигры</li>
+          </ul>
+        </li>
+        </li>
+        </ul>
+
+       
+
+<script>
+var all=document.getElementsByTagName("ul")[0];
+var list=all.getElementsByTagName("li");
+for(var i=0;i<list.length;i++){
+  var li=list[i];
+}
+all.onclick=function(el){
+  var target=el.target;
+  var father=el.target.parentNode.getElementsByTagName("ul")[0];
+  if(!father)return;
+  father.hidden=!father.hidden;
+}
