@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Creating a full pfrofile</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+<div id="tittle">
+<h1>Welcome to our club</h1>
+<h2>Share with your experiance</h2>
+<input type="button" value="Join our club" id="butt">
+</div>
+<div>
+ <form  hidden action="index.php" method="post" enctype="multipart/form-data" id="form">
+Name: <br />
+<input name="name"  id="name" type="text"  /> <br />
+Bio <br />
+ <textarea rows="10" cols="45" placeholder="Share with us..." name="text"></textarea>
+<p>Download a picture: <br />
+      <input type="file" name="file"><br></p>
+      <p><input type="submit" id="sub" name="submit" value="Create a profile"><br></p>
+      </form>
+      </div>
+     <script>
+     $(document).ready(function(){
+$("#tittle").slideDown("fast");
+     })
+     $("#butt").click(function(){
+     	$("#form").fadeIn();
+     	$("#tittle").slideUp();
+     })
+
+
+     </script>
+     <style>
+#tittle{
+	display: none;
+	position:absolute;
+	left:400px;
+	width:330px;
+	height:200px;
+	border:2px dashed green;
+	border-radius:20px;
+	background-color: orange;
+}
+h1{
+	text-align:center;
+}
+h2{
+	text-align:center;
+}
+#butt{
+	cursor: pointer;
+	position:absolute;
+	left:170px;
+  -webkit-border-radius: 24;
+  -moz-border-radius: 24;
+  border-radius: 24px;
+  text-shadow: 1px 1px 3px #19301c;
+  font-family: Georgia;
+  color: #cbf0c9;
+  font-size: 16px;
+  background: #94351e;
+  padding: 10px 20px 14px 16px;
+  text-decoration: none;
+}
+
+#butt:hover {
+  background: #a0d93c;
+  text-decoration: none;
+}
+
+
+     </style>
+</body>
+</html>
+
