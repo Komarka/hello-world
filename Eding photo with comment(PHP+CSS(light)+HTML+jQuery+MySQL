@@ -1,0 +1,89 @@
+<?php
+if(isset($_POST['submit'])){
+	$target="image/".basename($_FILES['file']['name']);
+	$db=mysqli_connect("localhost","root","","mydb");
+	$image=$_FILES['file']['name'];
+	$file_size=$_FILES['file']['size'];
+	$file_type=$_FILES['file']['type'];
+	$file_name=$_FILES['file']['name'];
+	$text=htmlspecialchars(trim(stripslashes($_POST['text']))); 
+	if(empty($text)){ 
+$text=htmlspecialchars(trim(stripslashes($_POST['text']))); 
+	echo "Fill the field of text";
+	echo "<br />"; 
+	exit;
+	}
+	else if ($file_size>1024*3*1024){ 
+echo("Unpropriate size of the photo"); 
+echo "<br />"; 
+exit;
+}
+else if(($file_type != "image/jpg") && ($file_type != "image/jpeg") && (!preg_match("/jpeg|jpg|png$/i",$file_name))){ 
+echo("Incorrect type"); 
+echo "<br />"; 
+exit;
+}else{
+
+	$sql="INSERT INTO imaging(image,text)VALUES('$image','$text')";
+	mysqli_query($db,$sql);
+	}
+	if(move_uploaded_file($_FILES['file']['tmp_name'],$target)){
+	}else{
+echo "there is some error";
+	}
+
+}
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Little blog with photo</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+<?php
+$db=mysqli_connect("localhost","root","","mydb");
+$sql="SELECT * FROM imaging";
+$result=mysqli_query($db,$sql);
+while($row=mysqli_fetch_array($result)){
+	echo "<div id=some_pic>";
+	echo "<img src='image/".$row['image']."' height=300 width=300>";
+	echo "<p id=para>".$row['text']."</p>";
+	echo "</div>";
+}
+
+?>
+ <form id=form  hidden  action="index.php" method="post" enctype="multipart/form-data">
+
+Description <br />
+ <textarea rows="10" cols="45" placeholder="Share with us..." name="text"></textarea>
+<p>Download a picture: <br />
+      <input type="file" name="file"><br></p>
+      <p><input type="submit" id="sub" name="submit" value="Submit"><br></p>
+      </form>
+      <input type="button" value="add photo" id="butt">
+      <script>
+      $("#butt").click(function(){
+      	$("#form").show();
+      })
+      $("#sub").click(function(){
+      	$("#form").hide();
+      })
+      </script>
+      <style>
+#some_pic{
+	border:3px solid yellow;
+	width:320px;
+	height:400px;
+
+}
+#para{
+	margin:6px;
+}
+
+      </style>
+    
+</body>
+</html>
