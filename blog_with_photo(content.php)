@@ -1,0 +1,28 @@
+<?php
+if(isset($_POST['submit'])){
+  $link=mysql_connect("localhost","root","");
+if (!$link) {
+    die('Ошибка соединения: ' . mysql_error());
+}
+mysql_select_db("comments") or die("Не могу подключиться к базе.");
+ $name=htmlspecialchars(trim(stripslashes($_POST['name'])));
+ $text=htmlspecialchars(trim(stripslashes($_POST['name'])));
+ $image_name=$_FILES['file']['name'];
+ $image_info=getimagesize($_FILES['file']['tmp_name']);
+ $image_mime=$image_info['mime'];
+ $image_size=$_FILES['file']['size'];
+ $image_data=file_get_contents($_FILES['file']['tmp_name']);
+ $image_name=mysql_real_escape_string($image_name);
+ $image_mime=mysql_real_escape_string($image_mime);
+  $image_size=mysql_real_escape_string($image_size);
+  $image_data=mysql_real_escape_string($image_data);
+  $query_1=mysql_query("INSERT INTO `images`(filename,mime_type,file_size,image_data) VALUES('$image_name','$image_mime','$image_size','$image_data')");
+  $user_id=mysql_insert_id();
+$query_2=mysql_query("INSERT INTO `users`(user_name,user_bio,img_user_id) VALUES('$name','$text','$user_id')");
+if($query_1){
+header("Location:main.php?user_id=".$user_id);
+}
+}
+mysql_close($link);
+
+?>
